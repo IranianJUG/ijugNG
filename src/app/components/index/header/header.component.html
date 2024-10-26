@@ -1,40 +1,64 @@
 <div class="flex shadow-md ...">
-  <div class="flex-initial w-80 ..."></div>
+  <div class="flex-initial w-80 hidden lg:flex ..."></div>
   <div class="grow h-20 ...">
     <div class="flex h-20 ...">
-      <div class="flex-initial w-96 align-middle ...">
-        <img src="/iduke/iduke-100.png" alt="Iranian Java User Group Logo">
-      </div>
-      <div class="grow self-center align-middle text-center ...">
-        <ul class="menu menu-vertical lg:menu-horizontal bg-base-200 rounded-box">
-          @for(menu of headerMenu;track menu){
-            <li><a [href]="menu.route">{{'menu.'+menu.name | translate}}</a></li>
-          }
-        </ul>
-      </div>
-      <div class="flex-initial self-center w-96 align-middle text-left ...">
-<!--        <button class="btn btn-ghost">-->
-<!--          <fa-icon [icon]="faInternational"/>-->
-<!--        </button>-->
-        <div class="dropdown dropdown-end">
-          <div tabindex="0" role="button" class="btn m-1">
-            <fa-icon [icon]="faInternational"/>
+      <div class="navbar bg-base-100">
+        <div class="navbar-start">
+          <div class="dropdown">
+            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h8m-8 6h16" />
+              </svg>
+            </div>
+            <ul
+              tabindex="0"
+              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+              @for(menu of headerMenu;track menu){
+                <li><a [href]="menu.route">{{'menu.'+menu.name | translate}}</a></li>
+              }
+            </ul>
           </div>
-          <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-            @for(lang of languages;track lang){
-              <li><a (click)="changeLanguage(lang)" [innerHTML]="'languages.'+lang | translate"></a></li>
+          <a class="btn btn-ghost text-xl">
+            <img src="/iduke/iduke-100.png" alt="Iranian Java User Group Logo" class="h-10">
+
+          </a>
+        </div>
+        <div class="navbar-center hidden lg:flex">
+          <ul class="menu menu-horizontal px-1">
+            @for(menu of headerMenu;track menu){
+              <li><a [href]="menu.route">{{'menu.'+menu.name | translate}}</a></li>
             }
           </ul>
         </div>
-        <button class="btn btn-ghost">
-          <fa-icon [icon]="faLock"/>
-          {{'user.login' | translate }}
-        </button>
-        <button class="mr-2 btn btn-secondary">{{'user.register' | translate }}</button>
-<!--        <button class="btn btn-primary">Primary</button>-->
+        <div class="navbar-end">
+          <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn m-1">
+              <fa-icon [icon]="faInternational"/>
+            </div>
+            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+              @for(lang of languages;track lang){
+                <li><a (click)="changeLanguage(lang)" [innerHTML]="'languages.'+lang | translate"></a></li>
+              }
+            </ul>
+          </div>
+          <button class="btn btn-ghost">
+            <fa-icon [icon]="faLock"/>
+            {{'user.login' | translate }}
+          </button>
+          <button class="mr-2 btn btn-secondary">{{'user.register' | translate }}</button>
+        </div>
       </div>
     </div>
   </div>
-  <div class="flex-initial w-80 ...">
+  <div class="flex-initial w-80 hidden lg:flex ...">
   </div>
 </div>
