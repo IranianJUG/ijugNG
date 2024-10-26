@@ -1,0 +1,34 @@
+@font-face {
+  font-family: iran;
+  font-style: normal;
+  src: url("../fonts/iransans.woff");
+  src: url("../fonts/iransans.woff") format("embedded-opentype"), url("../fonts/iransans.woff") format("woff2"), url("../fonts/iransans.woff") format("woff"), url("../fonts/iransans.woff") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: timeburner;
+  font-style: normal;
+  src: url("../fonts/timeburner.ttf");
+  src: url("../fonts/timeburner.ttf") format("embedded-opentype"), url("../fonts/timeburner.ttf") format("ttf"), url("../fonts/timeburner.ttf") format("ttf"), url("../fonts/timeburner.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: timeburnerB;
+  font-style: normal;
+  src: url("../fonts/timeburnerB.ttf");
+  src: url("../fonts/timeburnerB.ttf") format("embedded-opentype"), url("../fonts/timeburnerB.ttf") format("ttf"), url("../fonts/timeburnerB.ttf") format("ttf"), url("../fonts/timeburnerB.ttf") format("truetype");
+  font-display: swap;
+}
+
+body {
+  font-family: iran, sans-serif !important;
+}
+.gui-structure.gui-generic {
+  font-family: iran, sans-serif !important;
+}
+input {
+  font-family: iran, sans-serif !important;
+}
+.iran-family {
+  font-family: iran, sans-serif !important;
+}
