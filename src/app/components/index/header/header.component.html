@@ -6,18 +6,7 @@
         <div class="navbar-start">
           <div class="dropdown">
             <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h8m-8 6h16" />
-              </svg>
+              <fa-icon [icon]="faHamburger"/>
             </div>
             <ul
               tabindex="0"
@@ -28,7 +17,7 @@
             </ul>
           </div>
           <a class="btn btn-ghost text-xl">
-            <img src="/iduke/iduke-100.png" alt="Iranian Java User Group Logo" class="h-10">
+            <img src="/iduke/iduke-70.png" alt="Iranian Java User Group Logo" class="h-10">
 
           </a>
         </div>
@@ -40,6 +29,11 @@
           </ul>
         </div>
         <div class="navbar-end">
+          <button class="btn btn-ghost">
+            <fa-icon [icon]="faLock"/>
+            {{'user.login' | translate }}
+          </button>
+          <button class="mr-2 btn btn-secondary">{{'user.register' | translate }}</button>
           <div class="dropdown dropdown-end">
             <div tabindex="0" role="button" class="btn m-1">
               <fa-icon [icon]="faInternational"/>
@@ -50,11 +44,6 @@
               }
             </ul>
           </div>
-          <button class="btn btn-ghost">
-            <fa-icon [icon]="faLock"/>
-            {{'user.login' | translate }}
-          </button>
-          <button class="mr-2 btn btn-secondary">{{'user.register' | translate }}</button>
         </div>
       </div>
     </div>
