@@ -5,6 +5,7 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {faGlobe} from "@fortawesome/free-solid-svg-icons/faGlobe";
 import {TranslationService} from "../../../i18n";
+import {faBars} from "@fortawesome/free-solid-svg-icons/faBars";
 
 @Component({
   selector: 'app-header',
@@ -20,6 +21,7 @@ import {TranslationService} from "../../../i18n";
 export class HeaderComponent {
   faLock = faLock
   faInternational = faGlobe
+  faHamburger = faBars
   languages = ['fa', 'en'];
   headerMenu = [
     {

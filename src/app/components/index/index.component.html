@@ -1,1 +1,248 @@
 <app-header/>
+
+<section>
+  <div class="container mx-auto" style="direction: ltr">
+    <p-carousel
+      [value]="sliderContent"
+      [numVisible]="1"
+      [numScroll]="1"
+      [circular]="true"
+      autoplayInterval="10000">
+      <ng-template let-carousel #item>
+        <div class="w-full">
+          <div
+            class="h-[35rem] overflow-hidden carousel-item relative w-full items-center justify-center">
+            <!--Start: Carousel Content -->
+            <div class="w-full" [innerHTML]="carousel.content">
+
+            </div>
+            <!--END: Carousel Content -->
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+</section>
+
+<section class="container mx-auto mt-10">
+
+  <h2 class="font-semibold text-3xl">رویدادهای <span class="text-sky-700/70">اخیر</span>
+  </h2>
+  <p class="text-gray-300">رویداد ها و گردهمایی های اخیر و در حال برگذاری</p>
+  <div style="direction: ltr"
+    class="m-4 flex flex-row max-md:flex-col justify-center items-center overflow-hidden overflow-x-auto">
+    <p-carousel
+      [value]="recentEvents"
+      [numVisible]="5"
+      [numScroll]="5"
+      [circular]="false"
+      [responsiveOptions]="responsiveOptions"
+      autoplayInterval="10000">
+      <ng-template let-item #item>
+        <div
+          class="carousel-item m-2 bg-gray-100 rounded-xl flex-col transform hover:shadow-lg">
+          <div
+            class="flex justify-center rounded-t-xl items-center px-4 py-5 sm:p-6 bg-secondary h-52">
+            <img src="./draws/developer.svg" alt="Developer" class="h-40">
+          </div>
+          <div class="pt-4 pb-2 px-2">
+            <!--Footer-->
+            <p class="font-semibold">{{ item }}</p>
+            <p class="pt-2 text-gray-300">پنج‌شنبه ۲۱ تیر ۱۴۰۳ ساعت ۱۰:۰۰</p>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+
+</section>
+
+<section class="bg-gray-100 mt-10">
+  <div class="container pt-5 mx-auto pb-8">
+    <h2 class="font-semibold text-3xl"><span
+      class="text-sky-700/70">موضوعات </span>مختلف</h2>
+    <p class="text-gray-300">موضوعات و سرفصل هایی که اخیرا راجع به آنها صحبت شده
+      است</p>
+    <div
+      class="grid grid-cols-4 max-md:grid-cols-2 gap-4 justify-center items-center m-4">
+      @for (item of popularCategory; track item) {
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title">{{ item }}</h2>
+
+          </div>
+        </div>
+      }
+    </div>
+
+  </div>
+</section>
+
+
+<section class="container mx-auto mt-10">
+
+  <h2 class="font-semibold text-3xl">مربی‌های<span
+    class="text-sky-700/70">اخیر
+  </span></h2>
+  <p class="text-gray-300">مربی هایی که در رویداد های اخیر در خدمتشان بودیم</p>
+  <div style="direction: ltr"
+    class="m-4 flex flex-row max-md:flex-col justify-center items-center overflow-hidden overflow-x-auto">
+    <p-carousel
+      [value]="recentInstructor"
+      [numVisible]="5"
+      [numScroll]="5"
+      [circular]="false"
+      [responsiveOptions]="responsiveOptions"
+      autoplayInterval="10000">
+      <ng-template let-item #item>
+        <div
+          class="carousel-item bg-gray-100 m-2 rounded-xl h-full flex-col transform hover:shadow-lg">
+          <div
+            class="flex w-full items-center justify-center h-72 overflow-hidden rounded-xl">
+            <img [src]="item.image" alt="developer">
+          </div>
+          <div class="pt-4 pb-2 px-2">
+            <!--Footer-->
+            <p class="font-semibold">{{ item.name }}</p>
+            <div
+              class="flex w-full items-center justify-center overflow-hidden rounded-xl">
+              <p
+                class="pt-2 font-extralight text-gray-400/80 align-middle text-left">{{
+                  item.title }}</p>
+            </div>
+            <!--            <p class="pt-2 font-extralight text-gray-300">{{item.title}}</p>-->
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+
+  </div>
+
+</section>
+
+<section class="bg-zeus-100 mt-10">
+  <div class="container pt-5 mx-auto pb-8">
+    <h2 class="font-semibold text-3xl"><span
+      class="text-sky-700/70">آمارهای </span>ما</h2>
+    <p class="text-gray-300">آماری از رویدادها و اطلاعات دیگر گروه IJUG</p>
+    <hr>
+    <div class="grid grid-cols-2 max-md:grid-cols-1">
+      <div class="flex flex-col justify-center items-center">
+        <div
+          class="mt-10 flex justify-center items-center rounded-xl ring-offset-2 ring-2 ring-zeus-200 h-80 w-60 bg-zeus-200">
+          <img src="./draws/statistics.svg" alt="Chart">
+        </div>
+      </div>
+      <div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <div
+              class=" flex flex-row bg-zeus-200 rounded-xl h-14 gap-5 py-1 px-4 h-30 items-center align-middle relative">
+              <span class="">رویدادها: 10</span>
+              <div class="absolute left-0">
+                <svg class="h-16" fill="#32291f" width="100px"
+                     height="100px" viewBox="0 0 256 256" id="Flat"
+                     xmlns="http://www.w3.org/2000/svg">
+
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                     stroke-linejoin="round"/>
+
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M111.13672,158.97681a56.00028,56.00028,0,1,0-46.27246-.00025,92.23328,92.23328,0,0,0-52.13867,36.11719,3.99985,3.99985,0,1,0,6.541,4.60547A84.01746,84.01746,0,0,1,156.73,199.69434a4.00014,4.00014,0,0,0,6.541-4.60645A92.23237,92.23237,0,0,0,111.13672,158.97681ZM40.00049,108a48,48,0,1,1,48,48A48.05436,48.05436,0,0,1,40.00049,108Zm203.82519,92.66162a3.99923,3.99923,0,0,1-5.57373-.96728A84.17363,84.17363,0,0,0,169.522,164a4,4,0,0,1,0-8,48,48,0,1,0-13.02636-94.2124,4,4,0,1,1-2.166-7.70117A55.99661,55.99661,0,0,1,192.6582,158.97681,92.23507,92.23507,0,0,1,244.793,195.08789,4.0002,4.0002,0,0,1,243.82568,200.66162Z"/>
+                  </g>
+
+                </svg>
+              </div>
+
+            </div>
+          </div>
+          <div>
+            <div
+              class=" flex flex-row bg-zeus-200 rounded-xl h-14 gap-5 py-1 px-4 h-30 items-center align-middle relative">
+              <span class="">کاربرها: 10</span>
+              <div class="absolute left-0">
+                <svg class="h-16" fill="#32291f" width="100px"
+                     height="100px" viewBox="0 0 256 256" id="Flat"
+                     xmlns="http://www.w3.org/2000/svg">
+
+
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+
+                  <g id="SVGRepo_iconCarrier"> <path d="M111.13672,158.97681a56.00028,56.00028,0,1,0-46.27246-.00025,92.23328,92.23328,0,0,0-52.13867,36.11719,3.99985,3.99985,0,1,0,6.541,4.60547A84.01746,84.01746,0,0,1,156.73,199.69434a4.00014,4.00014,0,0,0,6.541-4.60645A92.23237,92.23237,0,0,0,111.13672,158.97681ZM40.00049,108a48,48,0,1,1,48,48A48.05436,48.05436,0,0,1,40.00049,108Zm203.82519,92.66162a3.99923,3.99923,0,0,1-5.57373-.96728A84.17363,84.17363,0,0,0,169.522,164a4,4,0,0,1,0-8,48,48,0,1,0-13.02636-94.2124,4,4,0,1,1-2.166-7.70117A55.99661,55.99661,0,0,1,192.6582,158.97681,92.23507,92.23507,0,0,1,244.793,195.08789,4.0002,4.0002,0,0,1,243.82568,200.66162Z"/> </g>
+
+                </svg>
+              </div>
+
+            </div>
+          </div>
+          <div>
+            <div
+              class=" flex flex-row bg-zeus-200 rounded-xl h-14 gap-5 py-1 px-4 h-30 items-center align-middle relative">
+              <span class="">بلیت‌ها: 1000</span>
+              <div class="absolute left-0">
+                <svg class="h-16" fill="#32291f" width="100px"
+                     height="100px" viewBox="0 0 256 256" id="Flat"
+                     xmlns="http://www.w3.org/2000/svg">
+
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+
+                  <g id="SVGRepo_iconCarrier"> <path d="M226.39648,100.56006A12.02757,12.02757,0,0,0,236,88.80957V64a12.01312,12.01312,0,0,0-12-12H32A12.01312,12.01312,0,0,0,20,64V88.80957a12.02757,12.02757,0,0,0,9.60352,11.75049,28.00781,28.00781,0,0,1,0,54.87988A12.02757,12.02757,0,0,0,20,167.19043V192a12.01312,12.01312,0,0,0,12,12H224a12.01312,12.01312,0,0,0,12-12V167.19043a12.02757,12.02757,0,0,0-9.60352-11.75049,28.00781,28.00781,0,0,1,0-54.87988ZM28,192V167.19043a4.00211,4.00211,0,0,1,3.19531-3.91016,36.00816,36.00816,0,0,0,0-70.56054A4.00211,4.00211,0,0,1,28,88.80957V64a4.00427,4.00427,0,0,1,4-4H92V196H32A4.00427,4.00427,0,0,1,28,192Zm168-64a36.0982,36.0982,0,0,0,28.80469,35.28027A4.00211,4.00211,0,0,1,228,167.19043V192a4.00427,4.00427,0,0,1-4,4H100V60H224a4.00427,4.00427,0,0,1,4,4V88.80957a4.00211,4.00211,0,0,1-3.19531,3.91016A36.0982,36.0982,0,0,0,196,128Z"/> </g>
+
+                </svg>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container pt-5 mx-auto pb-8">
+
+  </div>
+</section>
+
+<section class="bg-zeus-100">
+  <div class="container mx-auto pb-10">
+
+    <h2 class="font-semibold text-3xl">
+      اسپانسرها
+    </h2>
+    <div style="direction: ltr"
+         class="m-4 flex flex-row max-md:flex-col justify-center items-center overflow-hidden overflow-x-auto">
+      <p-carousel
+        [value]="ourSponsors"
+        [numVisible]="5"
+        [numScroll]="5"
+        [circular]="false"
+        [responsiveOptions]="responsiveOptions"
+        autoplayInterval="10000">
+        <ng-template let-item #item>
+          <div
+            class="carousel-item m-2 bg-gray-100 rounded-xl flex-col transform hover:shadow-lg">
+            <div
+              class="flex justify-center rounded-t-xl items-center px-4 py-5 sm:p-6 bg-[{{item.bg}}] h-52">
+              <img [src]="item.image" alt="Developer" class="w-40 h-auto">
+            </div>
+            <div class="pt-4 pb-2 px-2">
+              <!--Footer-->
+              <p class="font-semibold text-right">{{ item.name }}</p>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+
+  </div>
+</section>
+
+
+<app-footer/>
