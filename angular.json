@@ -76,6 +76,9 @@
               "buildTarget": "ijugNg:build:development"
             }
           },
+          "options": {
+            "proxyConfig": "src/proxy.conf.js"
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
