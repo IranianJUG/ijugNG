@@ -3,7 +3,7 @@
 <section>
   <div class="container mx-auto" style="direction: ltr">
     <p-carousel
-      [value]="sliderContent"
+      [value]="indexData.sliders"
       [numVisible]="1"
       [numScroll]="1"
       [circular]="true"
@@ -13,8 +13,12 @@
           <div
             class="h-[35rem] overflow-hidden carousel-item relative w-full items-center justify-center">
             <!--Start: Carousel Content -->
-            <div class="w-full" [innerHTML]="carousel.content">
-
+            <div class="w-full">
+              <div class="items-center justify-center gap-4">
+                <div class=" flex w-full items-center justify-center">
+                  <img [src]="imagePrefix+carousel.image" [alt]="carousel.title">
+                </div>
+              </div>
             </div>
             <!--END: Carousel Content -->
           </div>
@@ -31,28 +35,30 @@
   <p class="text-gray-300">رویداد ها و گردهمایی های اخیر و در حال برگذاری</p>
   <div style="direction: ltr"
     class="m-4 flex flex-row max-md:flex-col justify-center items-center overflow-hidden overflow-x-auto">
-    <p-carousel
-      [value]="recentEvents"
-      [numVisible]="5"
-      [numScroll]="5"
-      [circular]="false"
-      [responsiveOptions]="responsiveOptions"
-      autoplayInterval="10000">
-      <ng-template let-item #item>
-        <div
-          class="carousel-item m-2 bg-gray-100 rounded-xl flex-col transform hover:shadow-lg">
+      <p-carousel
+        [value]="indexData.recentEvents"
+        [numVisible]="5"
+        [numScroll]="5"
+        [circular]="false"
+        [responsiveOptions]="responsiveOptions"
+        autoplayInterval="10000">
+        <ng-template let-item #item>
           <div
-            class="flex justify-center rounded-t-xl items-center px-4 py-5 sm:p-6 bg-secondary h-52">
-            <img src="./draws/developer.svg" alt="Developer" class="h-40">
+            class="carousel-item m-2 bg-gray-100 rounded-xl flex-col transform hover:shadow-lg">
+            <div
+              class="flex justify-center rounded-t-xl items-center px-4 py-5 sm:p-6 bg-secondary h-52">
+              <img [src]="imagePrefix+item.image" alt="Developer"
+                   class="h-40">
+            </div>
+            <div class="pt-4 pb-2 px-2">
+              <!--Footer-->
+              <p class="font-semibold">{{ item.name }}</p>
+              <p class="pt-2 text-gray-300">{{item.event_time}}</p>
+            </div>
           </div>
-          <div class="pt-4 pb-2 px-2">
-            <!--Footer-->
-            <p class="font-semibold">{{ item }}</p>
-            <p class="pt-2 text-gray-300">پنج‌شنبه ۲۱ تیر ۱۴۰۳ ساعت ۱۰:۰۰</p>
-          </div>
-        </div>
-      </ng-template>
-    </p-carousel>
+        </ng-template>
+      </p-carousel>
+
   </div>
 
 </section>
@@ -65,10 +71,10 @@
       است</p>
     <div
       class="grid grid-cols-4 max-md:grid-cols-2 gap-4 justify-center items-center m-4">
-      @for (item of popularCategory; track item) {
+      @for (item of indexData.topics; track item) {
         <div class="card bg-base-100 shadow-xl">
           <div class="card-body">
-            <h2 class="card-title">{{ item }}</h2>
+            <h2 class="card-title">{{ item.title }}</h2>
 
           </div>
         </div>
@@ -88,7 +94,7 @@
   <div style="direction: ltr"
     class="m-4 flex flex-row max-md:flex-col justify-center items-center overflow-hidden overflow-x-auto">
     <p-carousel
-      [value]="recentInstructor"
+      [value]="indexData.instructors"
       [numVisible]="5"
       [numScroll]="5"
       [circular]="false"
@@ -99,7 +105,7 @@
           class="carousel-item bg-gray-100 m-2 rounded-xl h-full flex-col transform hover:shadow-lg">
           <div
             class="flex w-full items-center justify-center h-72 overflow-hidden rounded-xl">
-            <img [src]="item.image" alt="developer">
+            <img [src]="imagePrefix+item.image" fill alt="developer">
           </div>
           <div class="pt-4 pb-2 px-2">
             <!--Footer-->
@@ -107,10 +113,8 @@
             <div
               class="flex w-full items-center justify-center overflow-hidden rounded-xl">
               <p
-                class="pt-2 font-extralight text-gray-400/80 align-middle text-left">{{
-                  item.title }}</p>
+                class="pt-2 font-extralight text-gray-400/80 align-middle text-left" [innerHTML]="item.description"></p>
             </div>
-            <!--            <p class="pt-2 font-extralight text-gray-300">{{item.title}}</p>-->
           </div>
         </div>
       </ng-template>
@@ -138,7 +142,9 @@
           <div>
             <div
               class=" flex flex-row bg-zeus-200 rounded-xl h-14 gap-5 py-1 px-4 h-30 items-center align-middle relative">
-              <span class="">رویدادها: 10</span>
+              <span class="">رویدادها:
+              {{indexData.eventsCount}}
+              </span>
               <div class="absolute left-0">
                 <svg class="h-16" fill="#32291f" width="100px"
                      height="100px" viewBox="0 0 256 256" id="Flat"
@@ -162,7 +168,9 @@
           <div>
             <div
               class=" flex flex-row bg-zeus-200 rounded-xl h-14 gap-5 py-1 px-4 h-30 items-center align-middle relative">
-              <span class="">کاربرها: 10</span>
+              <span class="">کاربرها:
+              {{indexData.usersCount}}
+              </span>
               <div class="absolute left-0">
                 <svg class="h-16" fill="#32291f" width="100px"
                      height="100px" viewBox="0 0 256 256" id="Flat"
@@ -183,7 +191,9 @@
           <div>
             <div
               class=" flex flex-row bg-zeus-200 rounded-xl h-14 gap-5 py-1 px-4 h-30 items-center align-middle relative">
-              <span class="">بلیت‌ها: 1000</span>
+              <span class="">بلیت‌ها:
+              {{indexData.ticketCount}}
+              </span>
               <div class="absolute left-0">
                 <svg class="h-16" fill="#32291f" width="100px"
                      height="100px" viewBox="0 0 256 256" id="Flat"
@@ -219,7 +229,7 @@
     <div style="direction: ltr"
          class="m-4 flex flex-row max-md:flex-col justify-center items-center overflow-hidden overflow-x-auto">
       <p-carousel
-        [value]="ourSponsors"
+        [value]="indexData.sponsors"
         [numVisible]="5"
         [numScroll]="5"
         [circular]="false"
@@ -229,8 +239,9 @@
           <div
             class="carousel-item m-2 bg-gray-100 rounded-xl flex-col transform hover:shadow-lg">
             <div
-              class="flex justify-center rounded-t-xl items-center px-4 py-5 sm:p-6 bg-[{{item.bg}}] h-52">
-              <img [src]="item.image" alt="Developer" class="w-40 h-auto">
+              class="flex justify-center rounded-t-xl items-center px-4 py-5 sm:p-6 h-52">
+              <img [src]="imagePrefix+item.logo" fill alt="Developer"
+                   class="w-40 h-auto">
             </div>
             <div class="pt-4 pb-2 px-2">
               <!--Footer-->
