@@ -27,5 +27,5 @@ export interface EventResponseInterface {
 
 export interface EventsResponseInterface {
   success:boolean;
-  data?:EventInterface[];
+  data:EventInterface[];
 }
