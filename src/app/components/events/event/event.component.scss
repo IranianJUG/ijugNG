@@ -1,0 +1,9 @@
+::ng-deep {
+  .p-carousel-prev-button {
+    @apply bg-gray-300 rounded-full p-2 flex justify-center items-center mx-2;
+  }
+
+  .p-carousel-next-button {
+    @apply bg-gray-300 rounded-full p-2 flex justify-center items-center mx-2;
+  }
+}

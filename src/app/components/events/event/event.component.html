@@ -1,17 +1,95 @@
-<app-header/>
+<app-header />
 
 <section class="bg-zeus-300/60">
-  <div class=" container mx-auto p-10">
-    <h2 class="font-semibold text-2xl">
-      {{event?.name}}
-    </h2>
-    <div class="breadcrumbs text-sm text-gray-500/70">
-      <ul>
-        <li><a>خانه</a></li>
-        <li><a>رویدادها</a></li>
-        <li>{{event?.name}}</li>
-      </ul>
-    </div>
+  <div class="container mx-auto p-10">
+    <h2 class="font-semibold text-2xl text-center mb-6">{{ event?.name }}</h2>
+
+    <section>
+      <div class="container mx-auto" style="direction: ltr">
+        <p-carousel
+          [value]="galleryContent"
+          [numVisible]="1"
+          [numScroll]="1"
+          [circular]="true"
+          autoplayInterval="10000"
+          class="relative"
+        >
+          <ng-template let-carousel #item>
+            <div class="w-full">
+              <div
+                class="h-[35rem] overflow-hidden carousel-item relative w-full items-center justify-center rounded-lg shadow-lg transform transition-all duration-500 ease-in-out hover:scale-105"
+              >
+                <div class="w-full" [innerHTML]="carousel.content"></div>
+              </div>
+            </div>
+          </ng-template>
+        </p-carousel>
+      </div>
+    </section>
+
+    <section class="py-10">
+      <div class="container mx-auto px-4">
+        <!-- عنوان بخش -->
+        <h2 class="text-center text-3xl font-semibold text-gray-800 mb-12">
+          جزئیات رویداد
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- بخش توضیحات ایونت -->
+          <div
+            class="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+          >
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+              توضیحات ایونت
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              {{ sanitizedDescription }}
+            </p>
+          </div>
+
+          <!-- بخش جزئیات ایونت -->
+          <div
+            class="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+          >
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+              جزئیات ایونت
+            </h3>
+            <ul class="space-y-4 text-gray-700">
+              <li class="flex items-center">
+                <span class="font-semibold text-gray-900 w-24">آدرس:</span>
+                <span class="text-gray-600">{{ event?.location_address }}</span>
+              </li>
+              <li class="flex items-center">
+                <span class="font-semibold text-gray-900 w-24">تاریخ:</span>
+                <span class="text-gray-600">
+                  <!-- {{
+                  event?.date | date : "fullDate"
+                }} -->
+                </span>
+              </li>
+              <li class="flex items-center">
+                <span class="font-semibold text-gray-900 w-24">زمان:</span>
+                <span class="text-gray-600">{{
+                  event?.event_time | date : "shortTime"
+                }}</span>
+              </li>
+              <li class="flex items-center">
+                <span class="font-semibold text-gray-900 w-24">تگ‌ها:</span>
+                <span class="text-gray-600">{{ event?.tags?.join(", ") }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10">
+      <div class="container mx-auto">
+        <h3 class="font-semibold text-xl mb-4">مکان رویداد</h3>
+        <div id="map" style="height: 400px"></div>
+      </div>
+    </section>
   </div>
 </section>
-<app-footer/>
+
+<app-footer />
