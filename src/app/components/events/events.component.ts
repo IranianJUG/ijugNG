@@ -5,6 +5,7 @@ import {EventService} from "../../services/event.service";
 import {EventInterface} from "../../interfaces/event";
 import { environment } from '../../../environments/environment';
 import {RouterLink} from "@angular/router";
+import {jalaliPipe} from "../../pipes/jalali.pipe";
 
 const imagePrefix = environment.IMAGE_URL;
 
@@ -14,7 +15,8 @@ const imagePrefix = environment.IMAGE_URL;
   imports: [
     HeaderComponent,
     FooterComponent,
-    RouterLink
+    RouterLink,
+    jalaliPipe
   ],
   templateUrl: './events.component.html',
   styleUrl: './events.component.scss'
