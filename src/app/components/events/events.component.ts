@@ -1,19 +1,32 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HeaderComponent} from "../index/header/header.component";
 import {FooterComponent} from "../index/footer/footer.component";
+import {EventService} from "../../services/event.service";
+import {EventInterface} from "../../interfaces/event";
+import { environment } from '../../../environments/environment';
+import {RouterLink} from "@angular/router";
+
+const imagePrefix = environment.IMAGE_URL;
 
 @Component({
   selector: 'app-events',
   standalone: true,
   imports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    RouterLink
   ],
   templateUrl: './events.component.html',
   styleUrl: './events.component.scss'
 })
-export class EventsComponent {
-  events = ['هفدهمین رویداد تهران جاگ','شانزدهمین رویداد تهران جاگ','جشن روز' +
-  ' برنامه نویس','جلسه پانزدهم تهران جاگ','جلسه چهاردهم تهران جاگ']
-
+export class EventsComponent implements OnInit {
+  events!: EventInterface[];
+  constructor(private eventService:EventService) {
+  }
+  ngOnInit() {
+    this.eventService.getAll().subscribe((data)=>{
+      this.events=data.data
+    })
+  }
+  protected readonly imagePrefix = imagePrefix;
 }

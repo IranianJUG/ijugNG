@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
-import { animate, style, transition, trigger } from '@angular/animations';
 
-import { Carousel } from 'primeng/carousel';
-import { TranslateModule } from '@ngx-translate/core';
+import {Component, OnInit} from '@angular/core';
+import {HeaderComponent} from "./header/header.component";
+import {animate, style, transition, trigger} from "@angular/animations";
+import {NgOptimizedImage} from "@angular/common";
+import {Carousel} from "primeng/carousel";
+import {TranslateModule} from "@ngx-translate/core";
+import {FooterComponent} from "./footer/footer.component";
+import {IndexService} from "../../services/index.service";
+import {Index} from "../../interfaces";
+import { environment } from '../../../environments/environment';
 
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+const imagePrefix = environment.IMAGE_URL;
 
 @Component({
   selector: 'app-index',
@@ -32,71 +36,8 @@ import { FooterComponent } from './footer/footer.component';
     ]),
   ],
 })
-export class IndexComponent {
-  sliderContent: any = [
-    {
-      content: `<div class="items-center justify-center gap-4">
-                    <div class=" flex w-full items-center justify-center">
-                        <img src="./imgs/img-1.jpg" alt="developer">
-                    </div>
-               </div>`,
-    },
-    {
-      content: `<div class="items-center justify-center gap-4">
-                    <div class=" flex w-full items-center justify-center">
-                        <img src="./imgs/img-2.jpg" alt="developer">
-                    </div>
-               </div>`,
-    },
-  ];
-  sliderIndex: number = 0;
-  recentEvents = [
-    'هفدهمین رویداد تهران جاگ',
-    'شانزدهمین رویداد تهران جاگ',
-    'جشن روز برنامه نویس',
-    'جلسه پانزدهم تهران جاگ',
-    'جلسه چهاردهم تهران جاگ',
-  ];
-  popularCategory = [
-    'Javascript',
-    'TypeScript',
-    'JAVA',
-    'OracleDB',
-    'Java 23',
-    ';)',
-  ];
 
-  recentInstructor = [
-    {
-      name: 'مجید مصطفوی',
-      title:
-        'Experienced Java Developer and JUG Leader with a strong' +
-        ' background in building efficient, high-performance software solutions. Committed to community engagement and professional development.',
-      image: 'https://ijug.ir/team/Majid-1.jpg',
-    },
-    {
-      name: 'حسام غیاصی',
-      title:
-        'Software Engineer | Specializing in Java, Spring, Hibernate,' +
-        ' software architecture, TDD, DDD and agile | Leading development teams to higher quality and better productivity | Lifelong researcher and learner',
-      image: 'https://ijug.ir/team/Hesam.jpg',
-    },
-    {
-      name: 'فرناز مثیمی',
-      title: 'Java Developer',
-      image: 'https://ijug.ir/team/Farnaz.png',
-    },
-    {
-      name: 'امین بازگیر',
-      title: 'Java Developer',
-      image: 'https://ijug.ir/team/AminB.jpg',
-    },
-    {
-      name: 'امیررضا رضائیان',
-      title: 'Java Developer',
-      image: 'https://ijug.ir/team/AmirReza.jpg',
-    },
-  ];
+export class IndexComponent implements OnInit {
 
   ourSponsors = [
     {
@@ -145,22 +86,19 @@ export class IndexComponent {
     {
       breakpoint: '575px',
       numVisible: 1,
-      numScroll: 1,
-    },
-  ];
 
-  prevSlide(): void {
-    console.log('prev', this.sliderIndex);
-
-    if (this.sliderIndex > 0) {
-      this.sliderIndex -= 1;
+      numScroll: 1
     }
+  ]
+  indexData!:Index
+
+  constructor(private indexService:IndexService) {
+  }
+  ngOnInit(){
+    this.indexService.getIndexData().subscribe((data)=>{
+      this.indexData = data.data
+    })
   }
 
-  nextSlide(): void {
-    console.log('next', this.sliderIndex);
-    if (this.sliderIndex < this.sliderContent.length - 1) {
-      this.sliderIndex += 1;
-    }
-  }
+  protected readonly imagePrefix = imagePrefix;
 }
