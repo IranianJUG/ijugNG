@@ -6,41 +6,59 @@
         <div class="navbar-start">
           <div class="dropdown">
             <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-              <fa-icon [icon]="faHamburger"/>
+              <fa-icon [icon]="faHamburger" />
             </div>
             <ul
               tabindex="0"
-              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            >
               @for(menu of headerMenu;track menu){
-                <li><a [href]="menu.route">{{'menu.'+menu.name | translate}}</a></li>
+              <li>
+                <a [href]="menu.route">{{ "menu." + menu.name | translate }}</a>
+              </li>
               }
             </ul>
           </div>
           <a class="btn btn-ghost text-xl">
-            <img src="/iduke/iduke-70.png" alt="Iranian Java User Group Logo" class="h-10">
-
+            <img
+              src="/iduke/iduke-70.png"
+              alt="Iranian Java User Group Logo"
+              class="h-10"
+            />
           </a>
         </div>
         <div class="navbar-center hidden lg:flex">
           <ul class="menu menu-horizontal px-1">
             @for(menu of headerMenu;track menu){
-              <li><a [href]="menu.route">{{'menu.'+menu.name | translate}}</a></li>
+            <li>
+              <a [href]="menu.route">{{ "menu." + menu.name | translate }}</a>
+            </li>
             }
           </ul>
         </div>
         <div class="navbar-end">
-          <button class="btn btn-ghost">
-            <fa-icon [icon]="faLock"/>
-            {{'user.login' | translate }}
+          <button (click)="openLoginModal()" class="btn btn-ghost">
+            <fa-icon [icon]="faLock" />
+            {{ "user.login" | translate }}
           </button>
-          <button class="mr-2 btn btn-secondary">{{'user.register' | translate }}</button>
+          <button class="mr-2 btn btn-secondary">
+            {{ "user.register" | translate }}
+          </button>
           <div class="dropdown dropdown-end">
             <div tabindex="0" role="button" class="btn m-1">
-              <fa-icon [icon]="faInternational"/>
+              <fa-icon [icon]="faInternational" />
             </div>
-            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+            <ul
+              tabindex="0"
+              class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+            >
               @for(lang of languages;track lang){
-                <li><a (click)="changeLanguage(lang)" [innerHTML]="'languages.'+lang | translate"></a></li>
+              <li>
+                <a
+                  (click)="changeLanguage(lang)"
+                  [innerHTML]="'languages.' + lang | translate"
+                ></a>
+              </li>
               }
             </ul>
           </div>
@@ -48,6 +66,7 @@
       </div>
     </div>
   </div>
-  <div class="flex-initial w-80 hidden lg:flex ...">
-  </div>
+  <div class="flex-initial w-80 hidden lg:flex ..."></div>
 </div>
+
+<app-login [isOpen]="isModalOpen" (close)="closeLoginModal()"> </app-login>
