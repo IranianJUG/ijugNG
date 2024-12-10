@@ -24,7 +24,9 @@
           <div class="pt-4 pb-2 px-2">
             <!--Footer-->
             <p class="font-semibold">{{ item.name }}</p>
-            <p class="pt-2 text-gray-400">{{item.event_time}}</p>
+            <p
+              class="pt-2 text-gray-400 ltr">{{item.event_time | jalali
+              :'jYYYY/jMM/jDD - HH:mm'}}</p>
           </div>
         </div>
       </a>
