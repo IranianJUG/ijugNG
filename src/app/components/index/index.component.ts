@@ -9,7 +9,7 @@ import {FooterComponent} from "./footer/footer.component";
 import {IndexService} from "../../services/index.service";
 import {Index} from "../../interfaces";
 import { environment } from '../../../environments/environment';
-import {jalaliPipe} from "../../pipes/jalali.pipe";
+import {PersianDatePipe} from "../../pipes/persian-date.pipe";
 
 const imagePrefix = environment.IMAGE_URL;
 
@@ -22,7 +22,7 @@ const imagePrefix = environment.IMAGE_URL;
     Carousel,
     TranslateModule,
     FooterComponent,
-    jalaliPipe,
+    PersianDatePipe,
   ],
   templateUrl: './index.component.html',
   styleUrl: './index.component.scss',
