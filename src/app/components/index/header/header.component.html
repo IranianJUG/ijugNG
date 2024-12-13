@@ -19,7 +19,7 @@
               }
             </ul>
           </div>
-          <a class="btn btn-ghost text-xl">
+          <a [routerLink]="'/'" class="btn btn-ghost text-xl">
             <img
               src="/iduke/iduke-70.png"
               alt="Iranian Java User Group Logo"
@@ -37,13 +37,7 @@
           </ul>
         </div>
         <div class="navbar-end">
-          <button (click)="openLoginModal()" class="btn btn-ghost">
-            <fa-icon [icon]="faLock" />
-            {{ "user.login" | translate }}
-          </button>
-          <button class="mr-2 btn btn-secondary">
-            {{ "user.register" | translate }}
-          </button>
+
           <div class="dropdown dropdown-end">
             <div tabindex="0" role="button" class="btn m-1">
               <fa-icon [icon]="faInternational" />
@@ -62,6 +56,46 @@
               }
             </ul>
           </div>
+          @if (!userToken) {
+            <button (click)="openLoginModal()" class="btn btn-ghost">
+              <fa-icon [icon]="faLock" />
+              {{ "user.login" | translate }}
+            </button>
+            <button class="mr-2 btn btn-secondary">
+              {{ "user.register" | translate }}
+            </button>
+          } @else {
+            <div class="dropdown dropdown-end">
+              <div tabindex="0" role="button" class="btn btn-secondary m-1">
+                <fa-icon [icon]="faUser" />
+              </div>
+              <ul
+                tabindex="0"
+                class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+              >
+                <li>
+                  <span class="font-semibold text-gray-800">
+                    {{userData.first_name + ' '+ userData.last_name}}
+                  </span>
+                </li>
+                <li>
+                  <span class="font-xs text-gray-500">
+                    {{userData.position}}
+                  </span>
+                </li>
+                <li>
+                  <a class="font-normal" [routerLink]="'/user'">{{'user.profile' | translate}}</a>
+                </li>
+                <li>
+                  <a class="font-normal" [routerLink]="'/user/tickets'">{{'user.tickets' | translate}}</a>
+                </li>
+                <li>
+                  <a class="font-normal" [routerLink]="'/user/payments'">{{'user.payments' | translate}}</a>
+                </li>
+
+              </ul>
+            </div>
+          }
         </div>
       </div>
     </div>

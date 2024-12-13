@@ -27,10 +27,10 @@
     "@ngx-loading-bar/router": "^7.0.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
-    "@primeng/themes": "^18.0.0-rc.1",
+    "@primeng/themes": "^18.0.0",
     "jalali-moment": "^3.3.11",
     "leaflet": "^1.9.4",
-    "primeng": "^18.0.0-rc.1",
+    "primeng": "^18.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"

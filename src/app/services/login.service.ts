@@ -11,23 +11,22 @@ import { environment } from '../../environments/environment';
 export class LoginService {
   constructor(private http: HttpClient) {}
 
-  // makeLoginRequest(username: string, password: string): Observable<any> {
-  //   const body = new URLSearchParams({
-  //     'jakarta.faces.partial.ajax': 'true',
-  //     'jakarta.faces.source': 'PFSubmitBtn',
-  //     'jakarta.faces.partial.execute': 'formID',
-  //     'jakarta.faces.partial.render': 'formID',
-  //     PFSubmitBtn: 'PFSubmitBtn',
-  //     formID: 'formID',
-  //     username: '0081042019',
-  //     passwordID: 'testt',
-  //     'jakarta.faces.ViewState': '-7271162845117302532:8072132984368771304',
-  //   }).toString();
-  //   return this.http.post(loginUrl + '.xhtml', body.toString(), {
-  //     headers: new HttpHeaders().set(
-  //       'Content-Type',
-  //       'application/x-www-form-urlencoded'
-  //     ),
-  //   });
-  // }
+  requestOTP(phone:string):Observable<any> {
+    return this.http.post(environment.API_URL+'/auth/login',{mobile:phone})
+  }
+
+  verifyOTP(phone:string,otp:string):Observable<any> {
+    return this.http.post(environment.API_URL+'/auth/login',{mobile:phone,otp:otp})
+  }
+
+  getUserData(){
+    const token =localStorage.getItem('user')
+    if (token){
+      return JSON.parse(token)
+    }
+    return null
+  }
+  getUserToken(){
+    return localStorage.getItem('token')
+  }
 }

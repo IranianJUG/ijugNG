@@ -1,0 +1,38 @@
+<section class="container mx-auto my-10">
+  <div class="grid grid-cols-4 gap-4">
+    <div></div>
+    <div class="col-span-2">
+      <div class="card card-side bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">{{'user.profile'|translate}}</h2>
+          <p>
+            {{'user.detail.name'|translate}}:
+            <span>
+              {{userData.first_name + ' ' + userData.last_name }}
+            </span>
+          </p>
+          <p>
+            {{'user.detail.position'|translate}}:
+            <span>
+              {{userData.position }}
+            </span>
+          </p>
+          <p>
+            {{'user.detail.mobile'|translate}}:
+            <span>
+              {{userData.mobile }}
+            </span>
+          </p>
+          <p>
+            {{'user.detail.nationalCode'|translate}}:
+            <span>
+              {{userData.national_code }}
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</section>

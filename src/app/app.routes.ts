@@ -5,6 +5,10 @@ import {EventComponent} from "./components/events/event/event.component";
 import {
   Error404Component
 } from "./components/errors/error-404/error-404.component";
+import {UserComponent} from "./components/user/user.component";
+import {TicketComponent} from "./components/user/tickets/ticket/ticket.component";
+import {TicketsComponent} from "./components/user/tickets/tickets.component";
+import {PaymentsComponent} from "./components/user/payments/payments.component";
 
 export const routes: Routes = [
   {
@@ -18,6 +22,37 @@ export const routes: Routes = [
   {
     path: 'events/:slug',
     component: EventComponent
+  },
+  {
+    path: 'user',
+    children:[
+      {
+        path: '',
+        component:UserComponent
+      },
+      {
+        path:'tickets',
+        children:[
+          {
+            path: '',
+            component:TicketsComponent
+          },
+          {
+            path: ':id',
+            component:TicketComponent
+          }
+        ]
+      },
+      {
+        path:'payments',
+        children:[
+          {
+            path: '',
+            component:PaymentsComponent
+          },
+        ]
+      }
+    ]
   },
   {
     path: 'errors',
