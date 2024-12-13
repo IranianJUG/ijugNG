@@ -15,11 +15,15 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
 
           switch (error.status) {
             case 404: // NotFound
-              // this.router.navigateByUrl('/auth/validation-code');
               router.navigateByUrl('/errors/404');
               throw new Error('Not Found');
               break;
-
+            case 401: //UnAuthorized
+              localStorage.removeItem('token');
+              localStorage.removeItem('user');
+              router.navigateByUrl('/');
+              throw new Error('UnAuthorized');
+              break;
           }
         }
       } else {

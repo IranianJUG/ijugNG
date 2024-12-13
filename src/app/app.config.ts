@@ -12,6 +12,7 @@ import {
 } from "@angular/platform-browser/animations/async";
 import Aura from '@primeng/themes/aura';
 import {httpInterceptor} from "./http.interceptor";
+import {tokenInterceptor} from "./token.interceptor";
 
 
 export const appConfig: ApplicationConfig = {
@@ -23,7 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideLoadingBarInterceptor(),
     importProvidersFrom(BrowserAnimationsModule),
     provideHttpClient(
-      withInterceptors([httpInterceptor]),
+      withInterceptors([httpInterceptor,tokenInterceptor]),
     ),
     provideAnimationsAsync(),
     providePrimeNG({

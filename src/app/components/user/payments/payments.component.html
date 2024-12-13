@@ -1,0 +1,50 @@
+<section class="container mx-auto my-10">
+  <div class="grid grid-cols-5 gap-4">
+    <div></div>
+    <div class="col-span-3">
+      <div class="card card-side bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">{{'user.payments'|translate}}</h2>
+          <div class="my-5">
+            @if (payments) {
+              <div class="overflow-x-auto">
+                <table class="table">
+                  <!-- head -->
+                  <thead>
+                  <tr>
+                    <th style="width:25%">{{'payment.traceNumber'|translate}}</th>
+                    <th style="width:25%">{{'payment.amount'|translate}}</th>
+                    <th style="width:25%">{{'payment.model'|translate}}</th>
+                    <th style="width:25%">{{'payment.status'|translate}}</th>
+                    <th style="width:25%">{{'event.date'|translate}}</th>
+                    <th style="width:25%">{{'event.time'|translate}}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    @for (payment of payments.data;track payment) {
+                      <tr>
+                        <td>{{ payment.trace_number }}</td>
+                        <td>{{ payment.amount }}</td>
+                        <td>{{ 'models.'+payment.model | translate }}</td>
+                        <td>
+                          <span class="badge" [ngClass]="getSeverity(payment.status)">
+                            {{ 'status.'+ payment.status | translate }}
+                          </span>
+                        </td>
+                        <td>{{ payment.created_at |persianDate: 'jYYYY/jMM/jDD'}}</td>
+                        <td>{{ payment.created_at |persianDate: 'HH:mm'}}</td>
+
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</section>

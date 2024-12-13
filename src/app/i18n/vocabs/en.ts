@@ -1,4 +1,3 @@
-
 export const locale = {
   lang: 'en',
   data: {
@@ -6,11 +5,14 @@ export const locale = {
       en: '🇺🇸 English',
       fa: '🇮🇷 Persian'
     },
-    user:{
-      login:'Login',
-      register:'Register',
+    user: {
+      login: 'Login',
+      register: 'Register',
+      profile: 'Profile',
+      tickets: 'Tickets',
+      payments: 'Payments',
     },
-    menu:{
+    menu: {
       about: 'About',
       contact: 'Contact',
       blog: 'Blog',

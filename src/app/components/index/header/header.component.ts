@@ -1,25 +1,27 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { faLock } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faGlobe } from '@fortawesome/free-solid-svg-icons/faGlobe';
-import { faBars } from '@fortawesome/free-solid-svg-icons/faBars';
-import { TranslateModule } from '@ngx-translate/core';
+import {faLock} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {faGlobe,faUser,faBars} from '@fortawesome/free-solid-svg-icons';
+import {TranslateModule} from '@ngx-translate/core';
 
-import { TranslationService } from '../../../i18n';
-import { LoginComponent } from '../../login/login.component';
+import {TranslationService} from '../../../i18n';
+import {LoginComponent} from '../../login/login.component';
+import {LoginService} from "../../../services/login.service";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   standalone: true,
-  imports: [FontAwesomeModule, TranslateModule, LoginComponent],
+  imports: [FontAwesomeModule, TranslateModule, LoginComponent, RouterLink],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   isModalOpen: boolean = false;
   faLock = faLock;
   faInternational = faGlobe;
+  faUser = faUser
   faHamburger = faBars;
   languages = ['fa', 'en'];
   headerMenu = [
@@ -44,8 +46,17 @@ export class HeaderComponent {
       name: 'resources',
     },
   ];
+  userToken: string | null = null;
 
-  constructor(private translationService: TranslationService) {}
+  userData : any = null;
+
+  constructor(private translationService: TranslationService, private loginService: LoginService) {
+  }
+
+  ngOnInit() {
+    this.userToken = this.loginService.getUserToken()
+    this.userData = this.loginService.getUserData()
+  }
 
   protected changeLanguage(locale: string): void {
     this.translationService.setLanguage(locale);

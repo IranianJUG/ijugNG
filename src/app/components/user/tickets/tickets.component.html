@@ -1,0 +1,47 @@
+<section class="container mx-auto my-10">
+  <div class="grid grid-cols-5 gap-4">
+    <div></div>
+    <div class="col-span-3">
+      <div class="card card-side bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">{{'user.tickets'|translate}}</h2>
+          <div class="my-5">
+            @if (tickets) {
+              <div class="overflow-x-auto">
+                <table class="table">
+                  <!-- head -->
+                  <thead>
+                  <tr>
+                    <th style="width:25%">{{'event.name'|translate}}</th>
+                    <th style="width:25%">{{'event.price'|translate}}</th>
+                    <th style="width:25%">{{'event.date'|translate}}</th>
+                    <th style="width:25%">{{'event.time'|translate}}</th>
+                    <th style="width:25%">{{'event.action'|translate}}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  @for (ticket of tickets.data;track ticket) {
+                    <tr>
+                      <td>{{ ticket.event.name }}</td>
+                      <td>{{ ticket.event.price }}</td>
+                      <td>{{ ticket.event.event_time |persianDate: 'jYYYY/jMM/jDD'}}</td>
+                      <td>{{ ticket.event.event_time |persianDate: 'HH:mm'}}</td>
+                      <td>
+                        <a [routerLink]="[ticket.id]" class="size-4 btn btn-sm btn-ghost">
+                          <fa-icon class="size-4" [icon]="faCircleInfo" />
+                        </a>
+                      </td>
+                    </tr>
+                  }
+                  </tbody>
+                </table>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</section>
