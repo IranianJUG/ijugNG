@@ -4,8 +4,6 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Carousel } from 'primeng/carousel';
 import * as L from 'leaflet';
 
-import { FooterComponent } from '../../index/footer/footer.component';
-import { HeaderComponent } from '../../index/header/header.component';
 import { EventService } from '../../../services/event.service';
 import { EventInterface } from '../../../interfaces/event';
 import { PersianDatePipe } from '../../../pipes/persian-date.pipe';
@@ -18,14 +16,16 @@ const imagePrefix = environment.IMAGE_URL;
   templateUrl: './event.component.html',
   styleUrl: './event.component.scss',
   standalone: true,
-  imports: [FooterComponent, HeaderComponent, Carousel, PersianDatePipe],
+  imports: [Carousel, PersianDatePipe],
 })
 export class EventComponent implements OnInit {
   @Input() slug!: string;
   protected readonly imagePrefix = imagePrefix;
   event: EventInterface | undefined;
   safeDescription: SafeHtml | undefined;
-
+  remainCountMessage: string = '';
+  priceMessage: string = '';
+  isBuyButtonDisabled: boolean = false;
   galleryContent: any[] = [];
 
   constructor(
@@ -37,10 +37,40 @@ export class EventComponent implements OnInit {
     this.eventService.getOne(this.slug).subscribe((response) => {
       this.event = response.data;
 
+      this.isBuyButtonDisabled =
+        this.event?.remain_count === 0 || this.event?.price == null;
+
+      this.setMessages();
       this.descriptionModifier();
       this.loadGallery();
       this.getLocation();
     });
+  }
+
+  private setMessages(): void {
+    this.remainCountMessage =
+      'ظرفیت: ' +
+      (this.event?.remain_count === -1
+        ? 'نامحدود'
+        : this.event?.remain_count === 0
+        ? 'ظرفیت تکمیل'
+        : this.event?.remain_count?.toString());
+
+    this.priceMessage =
+      'قیمت: ' +
+      (this.event?.price == 0
+        ? 'رایگان'
+        : this.event?.price != null
+        ? this.formatCurrency(this.event.price, 'IRR')
+        : '');
+  }
+
+  protected isEventExpired(eventTime: string): boolean {
+    const today = new Date();
+    const todayString = today.toISOString().split('T')[0];
+    const eventDate = new Date(eventTime.split(' ')[0]);
+
+    return eventDate <= new Date(todayString);
   }
 
   private descriptionModifier(): void {
@@ -92,5 +122,12 @@ export class EventComponent implements OnInit {
     }).addTo(map);
 
     L.marker([lat, lng]).addTo(map).bindPopup(locName).openPopup();
+  }
+
+  private formatCurrency(amount: number, currencyCode: string = 'IRR'): string {
+    return new Intl.NumberFormat('fa-IR', {
+      style: 'currency',
+      currency: currencyCode,
+    }).format(amount);
   }
 }
