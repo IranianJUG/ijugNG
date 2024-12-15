@@ -1,9 +1,5 @@
-<app-header/>
-
 <div class="container mx-auto mt-10 min-h-[30rem]">
-  <h2 class="font-semibold text-2xl">
-    رویدادها
-  </h2>
+  <h2 class="font-semibold text-2xl">رویدادها</h2>
   <div class="breadcrumbs text-sm text-gray-500/70">
     <ul>
       <li><a>خانه</a></li>
@@ -13,25 +9,28 @@
 
   <div class="grid grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-2 mt-10">
     @for (item of events; track item) {
-      <a [routerLink]="[item.slug]">
+    <a [routerLink]="[item.slug]">
+      <div
+        class="carousel-item m-2 bg-gray-100 rounded-xl flex-col transform hover:shadow-lg"
+      >
         <div
-          class="carousel-item m-2 bg-gray-100 rounded-xl flex-col transform hover:shadow-lg">
-          <div
-            class="flex justify-center rounded-t-xl items-center px-4 py-5 sm:p-6 bg-secondary h-52">
-            <img [src]="imagePrefix+item.image" [alt]="item.name"
-                 class="h-52">
-          </div>
-          <div class="pt-4 pb-2 px-2">
-            <!--Footer-->
-            <p class="font-semibold">{{ item.name }}</p>
-            <p
-              class="pt-2 text-gray-400 ltr">{{item.event_time | persianDate
-              :'jYYYY/jMM/jDD - HH:mm'}}</p>
-          </div>
+          class="flex justify-center rounded-t-xl items-center px-4 py-5 sm:p-6 bg-secondary h-52"
+        >
+          <img
+            [src]="imagePrefix + item.image"
+            [alt]="item.name"
+            class="h-52"
+          />
         </div>
-      </a>
+        <div class="pt-4 pb-2 px-2">
+          <!--Footer-->
+          <p class="font-semibold">{{ item.name }}</p>
+          <p class="pt-2 text-gray-400 ltr">
+            {{ item.event_time | persianDate : "jYYYY/jMM/jDD - HH:mm" }}
+          </p>
+        </div>
+      </div>
+    </a>
     }
-
   </div>
 </div>
-<app-footer/>
