@@ -10,19 +10,19 @@ import {IndexService} from "../../services/index.service";
 import {Index} from "../../interfaces";
 import { environment } from '../../../environments/environment';
 import {PersianDatePipe} from "../../pipes/persian-date.pipe";
+import {RouterLink} from "@angular/router";
 
 const imagePrefix = environment.IMAGE_URL;
+const sliderPrefix = environment.PUBLIC_URL;
 
 @Component({
   selector: 'app-index',
   standalone: true,
   imports: [
-    HeaderComponent,
-    NgOptimizedImage,
     Carousel,
     TranslateModule,
-    FooterComponent,
     PersianDatePipe,
+    RouterLink,
   ],
   templateUrl: './index.component.html',
   styleUrl: './index.component.scss',
@@ -40,34 +40,6 @@ const imagePrefix = environment.IMAGE_URL;
 })
 
 export class IndexComponent implements OnInit {
-
-  ourSponsors = [
-    {
-      name: 'راهبرد هوشمند شهر',
-      image: './sponsors/smartcity.png',
-      bg: '#fff',
-    },
-    {
-      name: 'داده پردازان ارتباط گستر ویونا',
-      image: './sponsors/viona.png',
-      bg: '#fff',
-    },
-    {
-      name: 'ایران نیک',
-      image: './sponsors/irnic.png',
-      bg: '#4745EE',
-    },
-    {
-      name: 'پژوهشگاه دانش های بنیادی',
-      image: './sponsors/ipm.png',
-      bg: '#fff',
-    },
-    {
-      name: 'ایران نت',
-      image: './sponsors/iran-net.png',
-      bg: '#4745EE',
-    },
-  ];
 
   responsiveOptions = [
     {
@@ -103,4 +75,5 @@ export class IndexComponent implements OnInit {
   }
 
   protected readonly imagePrefix = imagePrefix;
+  protected readonly sliderPrefix = sliderPrefix;
 }
