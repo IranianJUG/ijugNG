@@ -85,7 +85,7 @@ export class EventComponent implements OnInit {
         return {
           content: `<div class="items-center justify-center gap-4">
                       <div class=" flex w-full items-center justify-center">
-                          <img src="${this.imagePrefix}/path/to/gallery/${image}" alt="Gallery image" class="w-full h-auto rounded-lg">
+                          <img src="${this.imagePrefix}/${image}" alt="Gallery image" class="w-full h[100%] rounded-lg">
                       </div>
                     </div>`,
         };

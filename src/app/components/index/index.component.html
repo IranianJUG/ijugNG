@@ -8,24 +8,27 @@
       autoplayInterval="10000"
     >
       <ng-template let-carousel #item>
-        <div class="w-full">
-          <div
-            class="h-[35rem] overflow-hidden carousel-item relative w-full items-center justify-center"
-          >
-            <!--Start: Carousel Content -->
-            <div class="w-full">
-              <div class="items-center justify-center gap-4">
-                <div class="flex w-full items-center justify-center">
-                  <img
-                    [src]="imagePrefix + carousel.image"
-                    [alt]="carousel.title"
-                  />
+        <a [routerLink]="carousel.link">
+          <div class="w-full">
+            <div
+              class="h-[35rem] overflow-hidden carousel-item relative w-full items-center justify-center"
+            >
+              <!--Start: Carousel Content -->
+              <div class="w-full">
+                <div class="items-center justify-center gap-4">
+                  <div class="flex w-full items-center justify-center h-[550px]">
+                    <img
+                      [src]="sliderPrefix + carousel.image"
+                      [alt]="carousel.title"
+                      style="height: 100%"
+                    />
+                  </div>
                 </div>
               </div>
+              <!--END: Carousel Content -->
             </div>
-            <!--END: Carousel Content -->
           </div>
-        </div>
+        </a>
       </ng-template>
     </p-carousel>
   </div>

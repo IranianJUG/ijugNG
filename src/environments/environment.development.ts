@@ -5,5 +5,6 @@ export const environment = {
   APP_THEME: "winter",
   TOKEN_STORAGE_KEY: "userToken",
   TOKEN_EXPIRE_TIME: 1000,
-  IMAGE_URL: "https://api.awscloud.ir/storage/"
+  IMAGE_URL: "https://api.awscloud.ir/storage/",
+  PUBLIC_URL: "https://api.awscloud.ir/"
 };
