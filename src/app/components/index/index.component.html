@@ -51,26 +51,28 @@
       autoplayInterval="10000"
     >
       <ng-template let-item #item>
-        <div
-          class="carousel-item m-2 bg-gray-100 rounded-xl flex-col transform hover:shadow-lg"
-        >
+        <a [routerLink]="['events',item.slug]">
           <div
-            class="flex justify-center rounded-t-xl items-center px-4 py-5 sm:p-6 bg-secondary h-52"
+            class="carousel-item m-2 bg-gray-100 rounded-xl flex-col transform hover:shadow-lg"
           >
-            <img
-              [src]="imagePrefix + item.image"
-              alt="Developer"
-              class="h-40"
-            />
+            <div
+              class="flex justify-center rounded-t-xl items-center px-4 py-5 sm:p-6 bg-secondary h-52"
+            >
+              <img
+                [src]="imagePrefix + item.image"
+                alt="Developer"
+                class="h-40"
+              />
+            </div>
+            <div class="pt-4 pb-2 px-2">
+              <!--Footer-->
+              <p class="font-semibold">{{ item.name }}</p>
+              <p class="pt-2 text-gray-300 ltr">
+                {{ item.event_time | persianDate : "jYYYY/jMM/jDD - HH:mm" }}
+              </p>
+            </div>
           </div>
-          <div class="pt-4 pb-2 px-2">
-            <!--Footer-->
-            <p class="font-semibold">{{ item.name }}</p>
-            <p class="pt-2 text-gray-300 ltr">
-              {{ item.event_time | persianDate : "jYYYY/jMM/jDD - HH:mm" }}
-            </p>
-          </div>
-        </div>
+        </a>
       </ng-template>
     </p-carousel>
   </div>
