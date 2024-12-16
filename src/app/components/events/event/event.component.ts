@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { Carousel } from 'primeng/carousel';
 import * as L from 'leaflet';
@@ -30,7 +32,9 @@ export class EventComponent implements OnInit {
 
   constructor(
     private eventService: EventService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private httpClient: HttpClient,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +49,38 @@ export class EventComponent implements OnInit {
       this.loadGallery();
       this.getLocation();
     });
+  }
+
+  protected isEventExpired(eventTime: string): boolean {
+    const today = new Date();
+    const todayString = today.toISOString().split('T')[0];
+    const eventDate = new Date(eventTime.split(' ')[0]);
+
+    return eventDate <= new Date(todayString);
+  }
+
+  protected purchase(eventId: number): void {
+    this.httpClient
+      .get(`https://api.awscloud.ir/api/smartis/event/${eventId}/1`)
+      .subscribe((response: any) => {
+        if (response.success) {
+          if (response.data.pay_status == false) {
+            this.redirectToPaymentPage(response.data.payment_id);
+          } else {
+            alert('خرید با موفقیت انجام شد.');
+          }
+        } else if (response.message) {
+          alert(response.message);
+        } else {
+          alert('خرید ناموفق بود. لطفا دوباره تلاش کنید.');
+        }
+      });
+  }
+
+  private redirectToPaymentPage(paymentId: string): void {
+    window.location.replace('https://wallet.smartispay.app/' + paymentId);
+    // const url = `https://wallet.smartispay.app/${paymentId}`;
+    // this.router.navigateByUrl(url);
   }
 
   private setMessages(): void {
@@ -63,14 +99,6 @@ export class EventComponent implements OnInit {
         : this.event?.price != null
         ? this.formatCurrency(this.event.price, 'IRR')
         : '');
-  }
-
-  protected isEventExpired(eventTime: string): boolean {
-    const today = new Date();
-    const todayString = today.toISOString().split('T')[0];
-    const eventDate = new Date(eventTime.split(' ')[0]);
-
-    return eventDate <= new Date(todayString);
   }
 
   private descriptionModifier(): void {
