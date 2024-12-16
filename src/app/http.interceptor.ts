@@ -1,7 +1,7 @@
-import {HttpErrorResponse, HttpInterceptorFn} from '@angular/common/http';
-import {catchError, throwError} from "rxjs";
-import {inject} from "@angular/core";
-import {Router} from "@angular/router";
+import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
+import { catchError, throwError } from 'rxjs';
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 export const httpInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
@@ -10,9 +10,7 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error) => {
       if (error instanceof HttpErrorResponse) {
         if (error.error instanceof ErrorEvent) {
-
         } else {
-
           switch (error.status) {
             case 404: // NotFound
               router.navigateByUrl('/errors/404');
@@ -22,6 +20,7 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
               localStorage.removeItem('token');
               localStorage.removeItem('user');
               router.navigateByUrl('/');
+              alert('برای خرید بلیط رویداد ابتدا ثبت نام نمایید.');
               throw new Error('UnAuthorized');
               break;
           }
@@ -29,5 +28,6 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
       } else {
       }
       return throwError(() => new Error(error.statusText));
-    }));
+    })
+  );
 };
