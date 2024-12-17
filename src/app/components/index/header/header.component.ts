@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import {faLock} from '@fortawesome/free-solid-svg-icons';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {faGlobe,faUser,faBars} from '@fortawesome/free-solid-svg-icons';
-import {TranslateModule} from '@ngx-translate/core';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faGlobe, faUser, faBars } from '@fortawesome/free-solid-svg-icons';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {TranslationService} from '../../../i18n';
-import {LoginComponent} from '../../login/login.component';
-import {LoginService} from "../../../services/login.service";
-import {RouterLink} from "@angular/router";
+import { TranslationService } from '../../../i18n';
+import { LoginComponent } from '../../login/login.component';
+import { LoginService } from '../../../services/login.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -21,20 +21,20 @@ export class HeaderComponent implements OnInit {
   isModalOpen: boolean = false;
   faLock = faLock;
   faInternational = faGlobe;
-  faUser = faUser
+  faUser = faUser;
   faHamburger = faBars;
   languages = ['fa', 'en'];
   headerMenu = [
     {
-      route: '/about',
+      route: '/#',
       name: 'about',
     },
     {
-      route: '/contact',
+      route: '/#',
       name: 'contact',
     },
     {
-      route: '/blog',
+      route: '/#',
       name: 'blog',
     },
     {
@@ -42,20 +42,22 @@ export class HeaderComponent implements OnInit {
       name: 'events',
     },
     {
-      route: '/resources',
+      route: '/#',
       name: 'resources',
     },
   ];
   userToken: string | null = null;
 
-  userData : any = null;
+  userData: any = null;
 
-  constructor(private translationService: TranslationService, private loginService: LoginService) {
-  }
+  constructor(
+    private translationService: TranslationService,
+    private loginService: LoginService
+  ) {}
 
   ngOnInit() {
-    this.userToken = this.loginService.getUserToken()
-    this.userData = this.loginService.getUserData()
+    this.userToken = this.loginService.getUserToken();
+    this.userData = this.loginService.getUserData();
   }
 
   protected changeLanguage(locale: string): void {
