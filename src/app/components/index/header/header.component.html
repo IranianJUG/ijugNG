@@ -61,7 +61,8 @@
               <fa-icon [icon]="faLock" />
               {{ "user.login" | translate }}
             </button>
-            <button class="mr-2 btn btn-secondary">
+            <button (click)="openRegisterModal()"
+                    class="mr-2 btn btn-secondary">
               {{ "user.register" | translate }}
             </button>
           } @else {
@@ -92,6 +93,11 @@
                 <li>
                   <a class="font-normal" [routerLink]="'/user/payments'">{{'user.payments' | translate}}</a>
                 </li>
+                <li>
+                  <a class="font-normal"
+                     (click)="logout()">{{'user.logout' |
+                    translate}}</a>
+                </li>
 
               </ul>
             </div>
@@ -104,3 +110,5 @@
 </div>
 
 <app-login [isOpen]="isModalOpen" (close)="closeLoginModal()"> </app-login>
+<app-register [isOpen]="isRegisterModalOpen" (close)="closeRegisterModal()">
+</app-register>

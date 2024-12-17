@@ -18,6 +18,7 @@ export interface EventInterface {
   price?:number;
   created_at?:number;
   updated_at?:number;
+  hasTicket?:boolean;
 }
 
 export interface EventResponseInterface {
