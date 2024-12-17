@@ -1,5 +1,5 @@
 export const environment = {
-  API_URL :"/api",
+  API_URL :"https://api.awscloud.ir/api",
   APP_VERSION: "0.0.1",
   APP_THEME: "winter",
   TOKEN_STORAGE_KEY: "userToken",
