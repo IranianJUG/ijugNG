@@ -28,6 +28,15 @@ export class RegisterComponent implements OnInit {
   isOTPRequesting: boolean = false;
   otpTimer:number =0;
 
+  phoneForm = new FormGroup({
+    phone: new FormControl<string>('', [
+      Validators.required,
+      Validators.minLength(11),
+      Validators.maxLength(11),
+      Validators.pattern("^[0-9]*$"),
+    ]),
+  });
+
   registerForm = new FormGroup({
     first_name:new FormControl<string>('', [
       Validators.required,
@@ -84,17 +93,22 @@ export class RegisterComponent implements OnInit {
   requestRegister() {
     if (this.registerForm.valid) {
       this.loginService.register(this.registerForm.value).subscribe((res)=>{
-          this.isOTPRequesting = true;
-          this.otpTimer = 60;
-          this.setCountDown()
+        if (this.registerForm.value.mobile){
+          this.phoneForm.setValue({'phone': this.registerForm.value.mobile});
+          this.requestLogin()
+        }
+
+        // this.isOTPRequesting = true;
+          // this.otpTimer = 60;
+          // this.setCountDown()
       })
     }
   }
 
   protected requestLogin(): void {
-    if (this.registerForm.valid) {
+    if (this.phoneForm.valid) {
       if (!this.isOTPRequesting) {
-        const phone = this.registerForm.get('mobile')?.value;
+        const phone = this.phoneForm.get('phone')?.value;
         if (!phone) return;
         this.loginService.requestOTP(phone).subscribe(res => {
           if (res.success) {
@@ -107,7 +121,7 @@ export class RegisterComponent implements OnInit {
     }
     if (this.isOTPRequesting) {
       if (this.otpForm.valid) {
-        const phone = this.registerForm.get('mobile')?.value;
+        const phone = this.phoneForm.get('mobile')?.value;
         if (!phone) return;
         const otp = this.otpForm.get('otp')?.value;
         if (!otp) return;
