@@ -9,16 +9,18 @@ import { TranslationService } from '../../../i18n';
 import { LoginComponent } from '../../login/login.component';
 import { LoginService } from '../../../services/login.service';
 import { RouterLink } from '@angular/router';
+import {RegisterComponent} from "../../register/register.component";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   standalone: true,
-  imports: [FontAwesomeModule, TranslateModule, LoginComponent, RouterLink],
+  imports: [FontAwesomeModule, TranslateModule, LoginComponent, RouterLink, RegisterComponent],
 })
 export class HeaderComponent implements OnInit {
   isModalOpen: boolean = false;
+  isRegisterModalOpen: boolean = false;
   faLock = faLock;
   faInternational = faGlobe;
   faUser = faUser;
@@ -67,8 +69,20 @@ export class HeaderComponent implements OnInit {
   protected openLoginModal(): void {
     this.isModalOpen = true;
   }
+  protected openRegisterModal(): void {
+    this.isRegisterModalOpen = true;
+  }
 
   protected closeLoginModal(): void {
     this.isModalOpen = false;
+  }
+  protected closeRegisterModal(): void {
+    this.isRegisterModalOpen = false;
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.reload();
   }
 }

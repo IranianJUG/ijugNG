@@ -1,0 +1,149 @@
+@if (isOpen && !userToken) {
+  <div
+    class="fixed z-[1001] inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+    (click)="closeModal()"
+  >
+    <div
+      class="bg-gray-800 rounded-lg shadow-md p-8 w-full max-w-md"
+      (click)="$event.stopPropagation()"
+    >
+      @if (!isOTPRequesting) {
+        <h2 class="text-2xl font-bold text-center text-white mb-6">
+          ثبت نام
+        </h2>
+        <form [formGroup]="registerForm">
+          <div class="mb-4">
+            <label for="phone" class="block text-gray-300 mb-2"
+            >نام </label>
+            <input
+              [formControl]="registerForm.controls.first_name"
+              type="text"
+              id="first_name"
+              autocomplete="off"
+              placeholder=""
+              class="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-slate-500"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="phone" class="block text-gray-300 mb-2"
+            >نام خانوادگی </label>
+            <input
+              [formControl]="registerForm.controls.last_name"
+              type="text"
+              id="last_name"
+              autocomplete="off"
+              placeholder=""
+              class="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-slate-500"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="phone" class="block text-gray-300 mb-2"
+            >شماره تلفن </label>
+            <input
+              [formControl]="registerForm.controls.mobile"
+              type="text"
+              id="phone"
+              autocomplete="off"
+              placeholder="09123456789"
+              class="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-slate-500"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="phone" class="block text-gray-300 mb-2"
+            >ایمیل </label>
+            <input
+              [formControl]="registerForm.controls.email"
+              type="email"
+              id="email"
+              autocomplete="off"
+              placeholder=""
+              class="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-slate-500"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="phone" class="block text-gray-300 mb-2"
+            >کد ملی </label>
+            <input
+              [formControl]="registerForm.controls.national_code"
+              type="text"
+              id="national_code"
+              autocomplete="off"
+              placeholder=""
+              class="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-slate-500"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="phone" class="block text-gray-300 mb-2"
+            >جایگاه شغلی </label>
+            <input
+              [formControl]="registerForm.controls.position"
+              type="text"
+              id="position"
+              autocomplete="off"
+              placeholder=""
+              class="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-slate-500"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="phone" class="block text-gray-300 mb-2"
+            >شرکت </label>
+            <input
+              [formControl]="registerForm.controls.company"
+              type="text"
+              id="company"
+              autocomplete="off"
+              placeholder=""
+              class="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-slate-500"
+            />
+          </div>
+          <button
+            (click)="requestRegister()"
+            [disabled]="!registerForm.valid"
+            type="button"
+            class="w-full py-2 bg-indigo-600/80 text-white disabled:bg-indigo-500 rounded-lg hover:bg-indigo-800 transition"
+          >
+            درخواست کد
+          </button>
+        </form>
+      } @else if (isOTPRequesting){
+        <h2 class="text-2xl font-bold text-center text-white mb-6">
+          تایید کد ورود
+        </h2>
+        <form [formGroup]="otpForm">
+          <div class="mb-4">
+            <label for="phone" class="block text-gray-300 mb-2"
+            >کد ارسال شده
+              @if(otpTimer==0){
+                <span class="text-xs text-gray-400" (click)="requestLogin()">
+              (کد را دریافت نکرده ام)
+            </span>
+              } @else {
+                <span class="text-xs text-gray-400">
+                ({{otpTimer}})
+              </span>
+              }
+
+            </label>
+            <div class="flex items-center justify-center gap-3" dir="ltr">
+              <p-inputotp [formControl]="otpForm.controls.otp" [length]="6">
+                <ng-template pTemplate="input" let-token let-events="events">
+                  <input
+                    class="w-14 h-14 text-center text-2xl border border-gray-600 rounded-lg bg-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-slate-500"
+                    (input)="events.input($event)" (keydown)="events.keydown($event)" type="text" [attr.value]="token" [maxLength]="1" />
+                </ng-template>
+              </p-inputotp>
+            </div>
+          </div>
+          <button
+            (click)="requestLogin()"
+            [disabled]="!otpForm.valid"
+            type="button"
+            class="w-full py-2 bg-indigo-600/80 text-white disabled:bg-indigo-500 rounded-lg hover:bg-indigo-800 transition"
+          >
+            ورود
+          </button>
+        </form>
+      }
+    </div>
+  </div>
+}

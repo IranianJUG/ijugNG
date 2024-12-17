@@ -19,6 +19,10 @@ export class LoginService {
     return this.http.post(environment.API_URL+'/auth/login',{mobile:phone,otp:otp})
   }
 
+  register(user:any):Observable<any> {
+    return this.http.post(environment.API_URL+'/user',user)
+  }
+
   getUserData(){
     const token =localStorage.getItem('user')
     if (token){

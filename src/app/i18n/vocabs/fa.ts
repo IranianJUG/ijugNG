@@ -27,6 +27,7 @@ export const locale = {
     },
     user:{
       login:'ورود',
+      logout:'خروج',
       register:'ثبت نام',
       profile:'اطلاعات کاربری',
       tickets:'بلیط ها',
