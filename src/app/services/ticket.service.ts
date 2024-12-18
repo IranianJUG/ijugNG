@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../../environments/environment";
-import {HttpClient} from "@angular/common/http";
-import {TicketResponse, TicketsResponse} from "../interfaces/ticket";
-import {Observable} from "rxjs";
-const API_URL = environment.API_URL+'/ticket/';
+import { HttpClient } from '@angular/common/http';
+
+import { Observable } from 'rxjs';
+
+import { environment } from '../../environments/environment';
+import { TicketResponse, TicketsResponse } from '../interfaces/ticket';
+
+const API_URL = environment.API_URL + '/ticket/';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TicketService {
-
   constructor(private http: HttpClient) {}
-  getTickets():Observable<TicketsResponse>{
-    return this.http.get<TicketsResponse>(API_URL)
+
+  getTickets(): Observable<TicketsResponse> {
+    return this.http.get<TicketsResponse>(API_URL);
   }
-  getTicket(id:number):Observable<TicketResponse>{
-    return this.http.get<TicketResponse>(API_URL+id)
+
+  getTicket(id: number): Observable<TicketResponse> {
+    return this.http.get<TicketResponse>(API_URL + id);
   }
 }

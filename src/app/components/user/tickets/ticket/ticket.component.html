@@ -1,1 +1,71 @@
-<p>ticket works!</p>
+<div class="container mx-auto py-8">
+  <h1 class="text-4xl font-bold mb-8 text-center text-gray-800">جزئیات بلیط</h1>
+
+  @if (ticket) {
+  <div class="bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-semibold text-indigo-700 mb-4">
+      {{ ticket.event.name }}
+    </h2>
+
+    <p class="text-gray-600 text-sm mb-3">
+      <span class="font-semibold">شرح مختصر:</span>
+      {{ ticket.event.short_description }}
+    </p>
+
+    <div class="mb-4">
+      <p class="text-gray-500 text-sm">
+        <span class="font-bold">تاریخ خرید:</span> {{ ticket.event.created_at }}
+      </p>
+      <p class="text-gray-500 text-sm">
+        <span class="font-bold">تاریخ رویداد:</span>
+        {{ ticket.event.event_time }}
+      </p>
+      <p class="text-gray-500 text-sm">
+        <span class="font-bold">تعداد بلیط:</span>
+        {{ ticket.event.total_count }}
+      </p>
+    </div>
+
+    <div class="border-t pt-4 mb-4">
+      <h3 class="text-lg font-bold text-gray-700 mb-2">محل برگزاری</h3>
+      <p class="text-gray-500 text-sm">
+        <span class="font-semibold">نام:</span> {{ ticket.event.location_name }}
+      </p>
+      <p class="text-gray-500 text-sm">
+        <span class="font-semibold">آدرس:</span>
+        {{ ticket.event.location_address }}
+      </p>
+    </div>
+
+    <div class="border-t pt-4">
+      <h3 class="text-lg font-bold text-gray-700 mb-2">اطلاعات خریدار</h3>
+      <p class="text-gray-500 text-sm">
+        <span class="font-semibold">نام:</span>
+        {{ ticket.first_name + " " + ticket.last_name }}
+      </p>
+      <p class="text-gray-500 text-sm">
+        <span class="font-semibold">موبایل:</span> {{ ticket.mobile }}
+      </p>
+      <p class="text-gray-500 text-sm">
+        <span class="font-semibold">ایمیل:</span> {{ ticket.email }}
+      </p>
+    </div>
+
+    <div class="border-t pt-4 mt-4">
+      <h3 class="text-lg font-bold text-gray-700 mb-2">شرح کامل</h3>
+      <div
+        [innerHTML]="ticket.event.description"
+        class="text-gray-600 text-sm"
+      ></div>
+    </div>
+
+    <!-- <button
+      (click)="downloadTicketAsPdf(ticket.id)"
+      class="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-700 transition-colors duration-300"
+    >
+      دانلود بلیط
+    </button> -->
+  </div>
+
+  }
+</div>
