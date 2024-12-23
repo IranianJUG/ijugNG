@@ -1,0 +1,42 @@
+@media print {
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .container {
+    width: 148mm; /* A5 width */
+    height: 210mm; /* A5 height */
+    margin: 0 auto;
+    padding: 20mm;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 12px;
+  }
+
+  .no-print {
+    display: none;
+  }
+
+  .shadow-lg {
+    box-shadow: none;
+  }
+
+  .bg-white {
+    background-color: white;
+  }
+
+  .container {
+    box-shadow: none;
+    background-color: transparent;
+  }
+}
