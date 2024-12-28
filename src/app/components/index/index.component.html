@@ -1,4 +1,4 @@
-<section>
+<section class="mt-5">
   <div class="container mx-auto">
     <p-carousel
       [value]="indexData.sliders"
@@ -16,7 +16,9 @@
               <!--Start: Carousel Content -->
               <div class="w-full">
                 <div class="items-center justify-center gap-4">
-                  <div class="flex w-full items-center justify-center h-[550px]">
+                  <div
+                    class="flex w-full items-center justify-center h-[550px]"
+                  >
                     <img
                       [src]="sliderPrefix + carousel.image"
                       [alt]="carousel.title"
@@ -51,7 +53,7 @@
       autoplayInterval="10000"
     >
       <ng-template let-item #item>
-        <a [routerLink]="['events',item.slug]">
+        <a [routerLink]="['events', item.slug]">
           <div
             class="carousel-item m-2 bg-gray-100 rounded-xl flex-col transform hover:shadow-lg"
           >
