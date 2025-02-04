@@ -19,6 +19,15 @@ export const locale = {
       model:'دلیل',
       status:'وضعیت',
     },
+    errors:{
+      Validation_errors:'خطای اعتبارسنجی',
+      User_Not_Found:'کاربر یافت نشد',
+      OTP_does_not_exist:'کد وارد شده صحیح نمی باشد',
+      Unauthenticated:'برای انجام عملیات نیازمند است وارد شوید',
+      The_email_has_already_been_taken : 'این ایمیل قبلا ثبت شده است',
+      The_mobile_has_already_been_taken :'این شماره تلفن قبلا ثبت شده است',
+      The_national_code_has_already_been_taken :'این کد ملی قبلا ثبت شده است',
+    },
     models:{
       event:'رویداد'
     },
